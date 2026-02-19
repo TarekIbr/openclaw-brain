@@ -37,3 +37,4 @@ Open in browser:
 
 ## Release Notes
 - Step 1 delivered dashboard shell layout, routing, and mock domain data.
+- UI polish: global CSS wired, tabs are clickable, navigation links work, mock chat input/send interaction added.

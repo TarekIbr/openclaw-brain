@@ -55,3 +55,15 @@
 ### Interne Sub-Prompts / Arbeitsnotizen
 - Vorhandenes Vite-Setup beibehalten und nur fehlende Anforderungen ergänzen.
 - Step klein halten, klare Dateien, keine Backend-Integration.
+
+## 2026-02-19 23:26 UTC — UI Feedback
+### User Prompt
+> [Thu 2026-02-19 23:26 UTC] ehm sieht ser hässlich aus als wenn css nicht läd und kein button funktioniert und so
+
+(Kernaussagen gespeichert)
+- Optik wirkt unstyled
+- Interaktive Elemente sollen sichtbar funktionieren
+
+### Interne Sub-Prompts / Arbeitsnotizen
+- Globales CSS hinzufügen und Layout visuell klar machen.
+- Minimal interaktive Elemente ergänzen (Tabs, Navigation, Input/Button), ohne Backend einzuführen.

@@ -1,71 +1,104 @@
+import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { agents, instances, logLines, messages, tasks } from '../services/mock/data';
 
-const panelStyle: React.CSSProperties = {
-  border: '1px solid #ddd',
-  borderRadius: 8,
-  padding: '0.75rem',
-  background: '#fff'
-};
-
 export function DashboardPage() {
+  const [activeTab, setActiveTab] = useState<'logs' | 'tasks'>('logs');
+  const [draft, setDraft] = useState('');
+
+  const visibleItems = useMemo(() => {
+    return activeTab === 'logs' ? logLines.map((l) => `[${l.level}] ${l.text}`) : tasks.map((t) => `${t.title} (${t.state})`);
+  }, [activeTab]);
+
   const active = instances[0];
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '240px 1fr 320px', minHeight: '100vh' }}>
-      <aside style={{ borderRight: '1px solid #eee', padding: '1rem' }}>
-        <h3>Navigation</h3>
-        <ul>
-          <li>Dashboard</li>
-          <li>Agents</li>
-        </ul>
-        <h4>Instances</h4>
-        <ul>
-          {instances.map((instance) => (
-            <li key={instance.id}>
-              {instance.name} ({instance.status})
-            </li>
-          ))}
-        </ul>
+    <div className="layout">
+      <aside className="sidebar stack">
+        <div className="card">
+          <h3>Navigation</h3>
+          <div className="stack">
+            <Link className="nav-btn active" to="/dashboard">Dashboard</Link>
+            <Link className="nav-btn" to="/agents">Agents</Link>
+          </div>
+        </div>
+
+        <div className="card">
+          <h4>Instances</h4>
+          <ul className="list-clean">
+            {instances.map((instance) => (
+              <li className="row" key={instance.id}>
+                <span>{instance.name}</span>
+                <span className="muted">{instance.status}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </aside>
 
-      <section style={{ padding: '1rem', background: '#f7f7f9' }}>
-        <header style={{ ...panelStyle, marginBottom: '1rem' }}>
-          <strong>Active:</strong> {active.name} · <strong>Status:</strong> {active.status}
+      <section className="main stack">
+        <header className="card row">
+          <span><strong>Active:</strong> {active.name}</span>
+          <span className="muted"><strong>Status:</strong> {active.status}</span>
         </header>
 
-        <main style={panelStyle}>
-          <h3>Chat (placeholder)</h3>
-          {messages.map((message) => (
-            <p key={message.id}>
-              <strong>{message.author}:</strong> {message.text}
-            </p>
-          ))}
+        <main className="card">
+          <h3>Chat</h3>
+          <div className="stack">
+            {messages.map((message) => (
+              <div key={message.id}>
+                <strong>{message.author}:</strong> {message.text}
+              </div>
+            ))}
+          </div>
+
+          <div className="chat-controls">
+            <input
+              className="chat-input"
+              value={draft}
+              onChange={(event) => setDraft(event.target.value)}
+              placeholder="Type a mock message..."
+            />
+            <button className="send-btn" onClick={() => setDraft('')}>Send</button>
+          </div>
         </main>
       </section>
 
-      <aside style={{ borderLeft: '1px solid #eee', padding: '1rem', background: '#fafafa' }}>
-        <h3>Right Panel</h3>
-        <p><strong>Tabs:</strong> Logs / Tasks</p>
-
-        <div style={{ ...panelStyle, marginBottom: '1rem' }}>
-          <h4>Logs</h4>
-          {logLines.map((log) => (
-            <p key={log.id}>[{log.level}] {log.text}</p>
-          ))}
+      <aside className="right-panel stack">
+        <div className="card">
+          <h3>Right Panel</h3>
+          <div className="chat-controls">
+            <button
+              className={`tab-btn ${activeTab === 'logs' ? 'active' : ''}`}
+              onClick={() => setActiveTab('logs')}
+            >
+              Logs
+            </button>
+            <button
+              className={`tab-btn ${activeTab === 'tasks' ? 'active' : ''}`}
+              onClick={() => setActiveTab('tasks')}
+            >
+              Tasks
+            </button>
+          </div>
         </div>
 
-        <div style={panelStyle}>
-          <h4>Tasks</h4>
-          {tasks.map((task) => (
-            <p key={task.id}>{task.title} ({task.state})</p>
-          ))}
+        <div className="card">
+          <h4>{activeTab === 'logs' ? 'Logs' : 'Tasks'}</h4>
+          <ul className="list-clean">
+            {visibleItems.map((item, index) => (
+              <li key={`${activeTab}-${index}`}>{item}</li>
+            ))}
+          </ul>
         </div>
 
-        <div style={{ ...panelStyle, marginTop: '1rem' }}>
+        <div className="card">
           <h4>Agents</h4>
-          {agents.map((agent) => (
-            <p key={agent.id}>{agent.name} — {agent.role}</p>
-          ))}
+          <ul className="list-clean">
+            {agents.map((agent) => (
+              <li key={agent.id}>{agent.name} — <span className="muted">{agent.role}</span></li>
+            ))}
+          </ul>
         </div>
       </aside>
     </div>
