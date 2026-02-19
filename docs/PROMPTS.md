@@ -156,3 +156,18 @@
 - Agent-Domain in Typen + Mock-Store standardisieren.
 - CRUD komplett in Zustand-Store, keine API-Aufrufe.
 - Mantine Table + Modal-Flow für schnelle Reviewbarkeit.
+
+## 2026-02-19 23:44 UTC — Step 6
+### User Prompt
+> [Thu 2026-02-19 23:44 UTC] Prompt 6 – Services Layer abstrahieren ...
+
+(Kernaussagen gespeichert)
+- Service Layer mit Interfaces/Wrappern
+- `services/apiClient.ts` placeholder
+- Domain Services: `instances/chat/agents/monitoring`
+- UI soll nur Services konsumieren, keine direkten Mock-Imports
+- Ziel: später Backend swap ohne UI-Refactor
+
+### Interne Sub-Prompts / Arbeitsnotizen
+- Mock-Datenquelle nur hinter Service-Modulen belassen.
+- Stores auf Service-Funktionen umstellen, Signaturen backend-tauglich halten.

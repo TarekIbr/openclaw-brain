@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import type { LogLine, Task } from '../types/models';
+import { buildAutonomyTask, buildLogLine, type LevelFilter } from '../services/monitoring';
 
-type LevelFilter = 'all' | 'info' | 'warn' | 'error';
 type LogsByInstance = Record<string, LogLine[]>;
 type TasksByInstance = Record<string, Task[]>;
 type PauseByInstance = Record<string, boolean>;
@@ -19,8 +19,6 @@ interface MonitoringStore {
   setFilter: (instanceId: string, filter: LevelFilter) => void;
   startAutonomyLoop: (instanceId: string) => void;
 }
-
-const makeId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 
 export const useMonitoringStore = create<MonitoringStore>((set, get) => ({
   logsByInstance: {},
@@ -48,10 +46,7 @@ export const useMonitoringStore = create<MonitoringStore>((set, get) => ({
     set((state) => ({
       logsByInstance: {
         ...state.logsByInstance,
-        [instanceId]: [
-          ...(state.logsByInstance[instanceId] ?? []),
-          { id: `log-${makeId()}`, level, text, createdAt: new Date().toISOString() }
-        ]
+        [instanceId]: [...(state.logsByInstance[instanceId] ?? []), buildLogLine(level, text)]
       }
     })),
 
@@ -76,23 +71,13 @@ export const useMonitoringStore = create<MonitoringStore>((set, get) => ({
   startAutonomyLoop: (instanceId) => {
     get().ensureInstance(instanceId);
 
-    const taskId = `task-${makeId()}`;
-    const now = new Date().toISOString();
+    const newTask = buildAutonomyTask('Autonomy Loop');
+    const taskId = newTask.id;
 
     set((state) => ({
       tasksByInstance: {
         ...state.tasksByInstance,
-        [instanceId]: [
-          ...(state.tasksByInstance[instanceId] ?? []),
-          {
-            id: taskId,
-            name: 'Autonomy Loop',
-            type: 'loop',
-            status: 'running',
-            startedAt: now,
-            updatedAt: now
-          }
-        ]
+        [instanceId]: [...(state.tasksByInstance[instanceId] ?? []), newTask]
       }
     }));
 
@@ -118,9 +103,7 @@ export const useMonitoringStore = create<MonitoringStore>((set, get) => ({
           tasksByInstance: {
             ...state.tasksByInstance,
             [instanceId]: (state.tasksByInstance[instanceId] ?? []).map((task) =>
-              task.id === taskId
-                ? { ...task, status: 'done', updatedAt: new Date().toISOString() }
-                : task
+              task.id === taskId ? { ...task, status: 'done', updatedAt: new Date().toISOString() } : task
             )
           }
         }));

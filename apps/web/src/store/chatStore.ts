@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import type { Message } from '../types/models';
-import { mockData } from '../services/mock/data';
-import { fakeAssistantStream } from '../services/mock/fakeStream';
+import { buildAssistantResponse, getConversationSeed, streamAssistantResponse } from '../services/chat';
 
 type Conversations = Record<string, Message[]>;
 
@@ -25,7 +24,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
     set((state) => ({
       conversations: {
         ...state.conversations,
-        [instanceId]: mockData.getConversationSeed(instanceId)
+        [instanceId]: getConversationSeed(instanceId)
       }
     }));
   },
@@ -64,9 +63,9 @@ export const useChatStore = create<ChatStore>((set, get) => ({
       }
     }));
 
-    const response = `Mock assistant stream for ${instanceId}: I received your message and I am responding token by token.`;
+    const response = buildAssistantResponse(instanceId, text.trim());
 
-    await fakeAssistantStream(response, (chunk) => {
+    await streamAssistantResponse(response, (chunk) => {
       set((state) => ({
         conversations: {
           ...state.conversations,

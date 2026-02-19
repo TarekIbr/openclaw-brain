@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { mockData } from '../services/mock/data';
 import type { Agent } from '../types/models';
+import { buildAgent, listAgents, patchAgent } from '../services/agents';
 
 type AgentInput = Pick<Agent, 'name' | 'modelPolicy' | 'toolsPolicy' | 'systemPrompt' | 'versionLabel'>;
 
@@ -11,7 +11,7 @@ interface AgentsStore {
   deleteAgent: (id: string) => void;
 }
 
-const initialAgents = mockData.getAgents();
+const initialAgents = listAgents();
 
 export const useAgentsStore = create<AgentsStore>((set) => ({
   agents: initialAgents,
@@ -19,17 +19,13 @@ export const useAgentsStore = create<AgentsStore>((set) => ({
     set((state) => ({
       agents: [
         ...state.agents,
-        {
-          id: `ag-${Date.now()}`,
-          ...input,
-          updatedAt: new Date().toISOString()
-        }
+        buildAgent(input)
       ]
     })),
   updateAgent: (id, input) =>
     set((state) => ({
       agents: state.agents.map((agent) =>
-        agent.id === id ? { ...agent, ...input, updatedAt: new Date().toISOString() } : agent
+        agent.id === id ? patchAgent(agent, input) : agent
       )
     })),
   deleteAgent: (id) =>

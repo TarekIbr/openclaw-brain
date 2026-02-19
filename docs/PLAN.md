@@ -36,11 +36,12 @@
 - Step 3: Chat UI mit Mock-Realtime fertiggestellt (Author-Bubbles, Composer, Enter/Shift+Enter, tokenweises Assistant-Streaming, per-instance conversations, basic smart autoscroll).
 - Step 4: Monitoring-Tabs mit Live-Simulation umgesetzt (Logs 1/s pro Instance inkl. Filter/Pause/Clear; Tasks inkl. Start Autonomy Loop + Log-Emissionen).
 - Step 5: Agent Manager UI als eigene Seite (`/agents`) mit Mock-CRUD (Add/Edit/Delete), Model/Tools Policies und System-Prompt Editor umgesetzt.
+- Step 6: Service-Abstraktionsschicht eingeführt (`apiClient`, domain services) und direkte Mock-Imports aus UI/Stores entfernt.
 
 ## Next
-- Step 6: Event-Protokoll + MockEventBus implementieren.
-- Step 7: Event-Stream für Chat/Logs/Tasks harmonisieren.
-- Step 8: Mock-Szenario Controls und Demo-Flows ergänzen.
+- Step 7: Event-Protokoll + MockWebSocket implementieren.
+- Step 8: Event-Stream für Chat/Logs/Tasks harmonisieren.
+- Step 9: Mock-Szenario Controls und Demo-Flows ergänzen.
 
 ## Blockers
 - Keine.
