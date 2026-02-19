@@ -25,12 +25,14 @@
 - Welche Event-Schemata müssen stabil sein für späteres Backend?
 
 ## Done
-- Step 1: Repo-Struktur, Grunddateien und Doku angelegt.
+- Step 0: Repo initialisiert, GitHub-Remote erstellt, `main` gepusht.
+- Step 0: Basis-Doku (`README`, `PLAN`, `PROMPTS`) und `.gitignore` angelegt.
+- Step 0: Vite React+TS Skeleton unter `apps/web` erstellt.
 
 ## Next
-- Step 2: Event-Protokoll + MockEventBus implementieren.
-- Step 3: Store + Domain-Typen ergänzen.
-- Step 4: Erste Seite mit Live-Mockfeed bauen.
+- Step 1: Event-Protokoll + MockEventBus implementieren.
+- Step 2: Store + Domain-Typen ergänzen.
+- Step 3: Erste Seite mit Live-Mockfeed bauen.
 
 ## Blockers
-- GitHub-Repo-Erstellung via `gh repo create` noch offen (CLI/Auth auf Host aktuell nicht verfügbar).
+- Keine.
