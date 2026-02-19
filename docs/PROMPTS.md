@@ -171,3 +171,17 @@
 ### Interne Sub-Prompts / Arbeitsnotizen
 - Mock-Datenquelle nur hinter Service-Modulen belassen.
 - Stores auf Service-Funktionen umstellen, Signaturen backend-tauglich halten.
+
+## 2026-02-19 23:44 UTC — Step 7
+### User Prompt
+> [Thu 2026-02-19 23:44 UTC] Prompt 7 – WS Event Protocol (nur Frontend)...
+
+(Kernaussagen gespeichert)
+- Event-Protokoll für `chat.delta/chat.done/log.line/task.update/agent.update/instance.update`
+- `MockWebSocket` als Event-Emitter bauen
+- Realtime-Architektur im Frontend etablieren
+
+### Interne Sub-Prompts / Arbeitsnotizen
+- Typed Events in `types/events.ts` modellieren.
+- MockWebSocket mit subscribe/emit + Simulationshelfern anlegen.
+- Chat-Streaming und Monitoring-Feed auf Event-Pfad umstellen.

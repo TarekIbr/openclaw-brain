@@ -37,11 +37,12 @@
 - Step 4: Monitoring-Tabs mit Live-Simulation umgesetzt (Logs 1/s pro Instance inkl. Filter/Pause/Clear; Tasks inkl. Start Autonomy Loop + Log-Emissionen).
 - Step 5: Agent Manager UI als eigene Seite (`/agents`) mit Mock-CRUD (Add/Edit/Delete), Model/Tools Policies und System-Prompt Editor umgesetzt.
 - Step 6: Service-Abstraktionsschicht eingeführt (`apiClient`, domain services) und direkte Mock-Imports aus UI/Stores entfernt.
+- Step 7: Event-Protokoll (`chat.delta/chat.done/log.line/task.update/agent.update/instance.update`) + MockWebSocket implementiert und in Chat/Monitoring verdrahtet.
 
 ## Next
-- Step 7: Event-Protokoll + MockWebSocket implementieren.
-- Step 8: Event-Stream für Chat/Logs/Tasks harmonisieren.
+- Step 8: Event-Stream für Chat/Logs/Tasks weiter harmonisieren.
 - Step 9: Mock-Szenario Controls und Demo-Flows ergänzen.
+- Step 10: Backend-Adapter (REST/WS) als austauschbare Implementierungen vorbereiten.
 
 ## Blockers
 - Keine.

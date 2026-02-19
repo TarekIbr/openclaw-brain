@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { Instance, InstanceStatus } from '../types/models';
 import { buildInstance, listInstances } from '../services/instances';
+import { mockWebSocket } from '../services/mockWebSocket';
 
 interface InstancesStore {
   instances: Instance[];
@@ -20,6 +21,7 @@ export const useInstancesStore = create<InstancesStore>((set) => ({
     set((state) => {
       const newInstance: Instance = buildInstance(name, status);
 
+      mockWebSocket.emitInstanceUpdate(newInstance.id, newInstance);
       return {
         instances: [...state.instances, newInstance],
         activeInstanceId: newInstance.id
@@ -27,8 +29,10 @@ export const useInstancesStore = create<InstancesStore>((set) => ({
     }),
   renameInstance: (id, name) =>
     set((state) => ({
-      instances: state.instances.map((instance) =>
-        instance.id === id ? { ...instance, name } : instance
-      )
+      instances: state.instances.map((instance) => {
+        const updated = instance.id === id ? { ...instance, name } : instance;
+        if (instance.id === id) mockWebSocket.emitInstanceUpdate(id, updated);
+        return updated;
+      })
     }))
 }));

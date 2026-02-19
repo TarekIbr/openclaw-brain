@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { Button, Group, ScrollArea, Select, Stack, Text } from '@mantine/core';
+import { mockWebSocket } from '../../services/mockWebSocket';
 import { useMonitoringStore } from '../../store/monitoringStore';
 
 interface LogsPanelProps {
@@ -29,16 +30,19 @@ export function LogsPanel({ instanceId }: LogsPanelProps) {
   }, [ensureInstance, instanceId]);
 
   useEffect(() => {
+    const unsubscribe = mockWebSocket.subscribe('log.line', (event) => {
+      if (event.instanceId !== instanceId) return;
+      appendLog(instanceId, event.payload.line.level, event.payload.line.text);
+    });
+
+    return () => unsubscribe();
+  }, [appendLog, instanceId]);
+
+  useEffect(() => {
     if (!instanceId || paused) return;
-
-    const interval = setInterval(() => {
-      const random = Math.random();
-      const level = random < 0.7 ? 'info' : random < 0.9 ? 'warn' : 'error';
-      appendLog(instanceId, level, `Live event on ${instanceId} (${level})`);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [appendLog, instanceId, paused]);
+    const stopFeed = mockWebSocket.startLogFeed(instanceId);
+    return () => stopFeed();
+  }, [instanceId, paused]);
 
   const visible = useMemo(() => {
     if (filter === 'all') return logs;

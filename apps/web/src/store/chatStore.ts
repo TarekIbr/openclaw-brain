@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { Message } from '../types/models';
-import { buildAssistantResponse, getConversationSeed, streamAssistantResponse } from '../services/chat';
+import { buildAssistantResponse, getConversationSeed } from '../services/chat';
+import { mockWebSocket } from '../services/mockWebSocket';
 
 type Conversations = Record<string, Message[]>;
 
@@ -63,20 +64,33 @@ export const useChatStore = create<ChatStore>((set, get) => ({
       }
     }));
 
-    const response = buildAssistantResponse(instanceId, text.trim());
-
-    await streamAssistantResponse(response, (chunk) => {
+    const unsubscribeDelta = mockWebSocket.subscribe('chat.delta', (event) => {
+      if (event.instanceId !== instanceId || event.payload.messageId !== assistantMessageId) return;
       set((state) => ({
         conversations: {
           ...state.conversations,
           [instanceId]: (state.conversations[instanceId] ?? []).map((message) =>
             message.id === assistantMessageId
-              ? { ...message, text: `${message.text}${chunk}` }
+              ? { ...message, text: `${message.text}${event.payload.chunk}` }
               : message
           )
         }
       }));
     });
+
+    const donePromise = new Promise<void>((resolve) => {
+      const unsubscribeDone = mockWebSocket.subscribe('chat.done', (event) => {
+        if (event.instanceId !== instanceId || event.payload.messageId !== assistantMessageId) return;
+        unsubscribeDone();
+        resolve();
+      });
+    });
+
+    const response = buildAssistantResponse(instanceId, text.trim());
+    await mockWebSocket.emitChatStream(instanceId, assistantMessageId, response);
+    await donePromise;
+
+    unsubscribeDelta();
 
     set((state) => ({
       streamingByInstance: {

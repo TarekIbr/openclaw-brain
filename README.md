@@ -14,14 +14,15 @@ OpenClaw Brain – frontend-first React + TypeScript app with mock realtime even
 - **Step 4**: Monitoring rechts umgesetzt: Logs/Tasks Tabs mit Live-Logfeed (1/s), Level-Filter, Pause/Resume, Clear und Autonomy-Task-Loop inkl. Log-Events.
 - **Step 5**: Agent Manager UI unter `/agents` mit mock CRUD umgesetzt (Liste, Add/Edit Modal inkl. System Prompt + Version Label, Delete Confirmation).
 - **Step 6**: Services Layer abstrahiert (`apiClient`, `instances`, `chat`, `agents`, `monitoring`) und UI/Stores auf Service-Imports standardisiert.
+- **Step 7**: Event-Protokoll (`types/events.ts`) + `MockWebSocket` gebaut; Chat/Monitoring sind auf event-basierte Realtime-Flows umgestellt.
 
 ## 🚧 In Progress
-- **Step 7**: WS Event-Protokoll und `MockWebSocket` aufsetzen.
+- **Step 8**: Event-Stream Harmonisierung und Szenario-Flows.
 
 ## 🧭 Next
-1. Step 7: Event protocol + `MockWebSocket` service implementieren.
-2. Step 8: Chat, Logs, Tasks über zentrales Event-Schema koppeln.
-3. Step 9: Szenario-Controls für reproduzierbare Mock-Demos ergänzen.
+1. Step 8: Chat, Logs, Tasks weiter über zentrales Event-Schema harmonisieren.
+2. Step 9: Szenario-Controls für reproduzierbare Mock-Demos ergänzen.
+3. Step 10: Backend-Adapter vorbereiten (REST/WS austauschbar).
 
 ## 🗺️ Roadmap
 - Phase A: Foundation (repo, docs, frontend shell)
@@ -47,3 +48,4 @@ Open in browser:
 - Step 4 adds realistic monitoring behavior: live logs, controls, and autonomy-loop task simulation.
 - Step 5 adds Agent Manager page with complete frontend CRUD on mock store data.
 - Step 6 adds stable service interfaces so backend transport can be swapped later without UI refactor.
+- Step 7 introduces a typed realtime event protocol and a MockWebSocket emitter architecture.
