@@ -185,3 +185,23 @@
 - Typed Events in `types/events.ts` modellieren.
 - MockWebSocket mit subscribe/emit + Simulationshelfern anlegen.
 - Chat-Streaming und Monitoring-Feed auf Event-Pfad umstellen.
+
+## 2026-02-19 23:51 UTC — Backend Step 1
+### User Prompt
+> [Thu 2026-02-19 23:51 UTC] Step 1 (Backend): Lege apps/api als Node+TypeScript Fastify Server an...
+
+(Kernaussagen gespeichert)
+- `apps/api` Fastify + TypeScript skeleton
+- Endpoint `GET /api/health` => `{ ok, ts, version }`
+- `.env` Konfig mit `PORT`, `NODE_ENV`
+- Struktur: `src/index.ts`, `src/server.ts`, `src/routes/health.ts`
+- `packages/shared` anlegen (shared types/schemas, zod optional)
+- Dockerfile + docker compose api service
+- README auf Backend Step 1 done + Next Step 2 WS/Auth
+- `docs/PLAN.md` und `docs/PROMPTS.md` aktualisieren
+- Commit-Message exakt: `step-1: api skeleton + health endpoint`
+
+### Interne Sub-Prompts / Arbeitsnotizen
+- Backend als separaten Step-Zweig (Backend Step 1) dokumentieren.
+- API lauffähig lokal und in Docker vorbereiten.
+- Shared package minimal halten, später echte monorepo wiring ergänzen.

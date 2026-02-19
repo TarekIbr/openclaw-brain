@@ -1,0 +1,11 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    container_name: openclaw-brain-api
+    env_file:
+      - apps/api/.env.example
+    ports:
+      - "8080:8080"
+    restart: unless-stopped

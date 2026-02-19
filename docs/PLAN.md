@@ -6,13 +6,13 @@
 - Architektur so vorbereiten, dass später ein echtes Backend eingesteckt werden kann.
 
 ## Architektur (aktueller Stand)
-- Monorepo-light Struktur mit `apps/web`.
-- Vite-kompatible TS-React App (manuell aufgebaut).
-- Geplante Layer:
-  - `types/`: Event- und Domain-Typen
-  - `services/`: `MockEventBus`, später echte Transportadapter
-  - `store/`: zentraler State für UI + Events
-  - `components/` und `pages/`: UI
+- Monorepo-light Struktur mit `apps/web`, `apps/api`, `packages/shared`.
+- Frontend: Vite + React + TypeScript.
+- Backend: Fastify + TypeScript (Skeleton).
+- Layer:
+  - `apps/web/src/types|services|store|components|pages`
+  - `apps/api/src/routes` + server bootstrap
+  - `packages/shared` für wiederverwendbare Types/Schemas
 
 ## Entscheidungen
 - Kleine, reviewbare Steps statt großer Initial-Scaffold-Explosion.
@@ -38,11 +38,12 @@
 - Step 5: Agent Manager UI als eigene Seite (`/agents`) mit Mock-CRUD (Add/Edit/Delete), Model/Tools Policies und System-Prompt Editor umgesetzt.
 - Step 6: Service-Abstraktionsschicht eingeführt (`apiClient`, domain services) und direkte Mock-Imports aus UI/Stores entfernt.
 - Step 7: Event-Protokoll (`chat.delta/chat.done/log.line/task.update/agent.update/instance.update`) + MockWebSocket implementiert und in Chat/Monitoring verdrahtet.
+- Backend Step 1: `apps/api` Fastify-Server, Health-Route, ENV-Config, Dockerfile + Compose-Service und `packages/shared` Basisstruktur angelegt.
 
 ## Next
-- Step 8: Event-Stream für Chat/Logs/Tasks weiter harmonisieren.
-- Step 9: Mock-Szenario Controls und Demo-Flows ergänzen.
-- Step 10: Backend-Adapter (REST/WS) als austauschbare Implementierungen vorbereiten.
+- Backend Step 2: WebSocket + Auth-Basis implementieren.
+- Backend Step 3: API↔Frontend Event-Brücke definieren.
+- Backend Step 4: Persistenzschicht vorbereiten.
 
 ## Blockers
 - Keine.

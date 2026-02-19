@@ -3,26 +3,20 @@
 OpenClaw Brain – frontend-first React + TypeScript app with mock realtime events.
 
 ## ✅ Done
-- **Step 0**: Git-Repo `openclaw-brain` initialisiert und zu GitHub gepusht.
-- **Step 0**: `README.md`, `docs/PLAN.md`, `docs/PROMPTS.md`, `.gitignore` angelegt.
-- **Step 0**: React + TypeScript (Vite) unter `apps/web` mit minimalem Startscreen aufgesetzt.
-- **Step 1**: Dashboard-Skeleton mit Mantine UI Kit umgesetzt (Sidebar Instances, Topbar Status, Chat Main, Logs/Tasks Tabs rechts).
-- **Step 1**: Routing auf `/` als Dashboard-Default umgestellt.
-- **Step 1**: Typen angelegt (`Instance`, `Agent`, `Message`, `Task`, `LogLine`) + `services/mock` Fake-Daten-Service.
-- **Step 2**: Instances Sidebar vollständig mit Zustand-Store umgesetzt (select active, rename inline, create via modal, active highlight).
-- **Step 3**: Chat UI mock-realistisch umgesetzt (rollenbasierte Bubbles, Composer mit Enter/Shift+Enter, Fake-Streaming, Auto-Scroll mit User-Scroll-Respekt, Konversation pro Instance).
-- **Step 4**: Monitoring rechts umgesetzt: Logs/Tasks Tabs mit Live-Logfeed (1/s), Level-Filter, Pause/Resume, Clear und Autonomy-Task-Loop inkl. Log-Events.
-- **Step 5**: Agent Manager UI unter `/agents` mit mock CRUD umgesetzt (Liste, Add/Edit Modal inkl. System Prompt + Version Label, Delete Confirmation).
-- **Step 6**: Services Layer abstrahiert (`apiClient`, `instances`, `chat`, `agents`, `monitoring`) und UI/Stores auf Service-Imports standardisiert.
-- **Step 7**: Event-Protokoll (`types/events.ts`) + `MockWebSocket` gebaut; Chat/Monitoring sind auf event-basierte Realtime-Flows umgestellt.
+- **Frontend Step 0–7**: Dashboard, Chat, Monitoring, Agent Manager, Service Layer und MockWebSocket-Realtime stehen.
+- **Backend Step 1**: `apps/api` Fastify + TypeScript Skeleton angelegt.
+- **Backend Step 1**: `GET /api/health` liefert `{ ok: true, ts, version }`.
+- **Backend Step 1**: `.env`-Konfiguration vorbereitet (`PORT`, `NODE_ENV`, `VERSION`).
+- **Backend Step 1**: `packages/shared` Basisstruktur angelegt (shared types/schemas).
+- **Backend Step 1**: Dockerfile für API + `docker-compose.yml` Service ergänzt.
 
 ## 🚧 In Progress
-- **Step 8**: Event-Stream Harmonisierung und Szenario-Flows.
+- **Backend Step 2**: WS + Auth.
 
 ## 🧭 Next
-1. Step 8: Chat, Logs, Tasks weiter über zentrales Event-Schema harmonisieren.
-2. Step 9: Szenario-Controls für reproduzierbare Mock-Demos ergänzen.
-3. Step 10: Backend-Adapter vorbereiten (REST/WS austauschbar).
+1. Backend Step 2: WebSocket Gateway + Auth-Basis.
+2. Backend Step 3: Event-Bridge API ↔ Web.
+3. Backend Step 4: Persistenz (erste DB-Schnittstellen).
 
 ## 🗺️ Roadmap
 - Phase A: Foundation (repo, docs, frontend shell)
@@ -32,14 +26,29 @@ OpenClaw Brain – frontend-first React + TypeScript app with mock realtime even
 - Phase E: Quality (tests, linting, CI)
 
 ## 🧪 How to run
+Web app:
 ```bash
 cd apps/web
 npm install
 npm run dev
 ```
 
+API:
+```bash
+cd apps/api
+cp .env.example .env
+npm install
+npm run dev
+```
+
+Docker (API only):
+```bash
+docker compose up --build api
+```
+
 Open in browser:
-- `http://localhost:5173/`
+- Web: `http://localhost:5173/`
+- API health: `http://localhost:8080/api/health`
 
 ## Release Notes
 - Step 1 rebuilt with Mantine and a cleaner dashboard skeleton + dark theme baseline.
@@ -49,3 +58,4 @@ Open in browser:
 - Step 5 adds Agent Manager page with complete frontend CRUD on mock store data.
 - Step 6 adds stable service interfaces so backend transport can be swapped later without UI refactor.
 - Step 7 introduces a typed realtime event protocol and a MockWebSocket emitter architecture.
+- Backend Step 1 introduces Fastify API skeleton with health endpoint and Docker compose service.
