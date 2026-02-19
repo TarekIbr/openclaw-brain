@@ -1,16 +1,6 @@
 import { useState } from 'react';
-import {
-  AppShell,
-  Badge,
-  Box,
-  Group,
-  Paper,
-  Stack,
-  Tabs,
-  Text,
-  TextInput,
-  Title
-} from '@mantine/core';
+import { AppShell, Badge, Group, Paper, Stack, Tabs, Text, Title } from '@mantine/core';
+import { ChatPanel } from '../components/chat/ChatPanel';
 import { InstancesSidebar } from '../components/instances/InstancesSidebar';
 import { mockData } from '../services/mock/data';
 import { useInstancesStore } from '../store/instancesStore';
@@ -23,10 +13,8 @@ const statusColor = {
 
 export function DashboardPage() {
   const [activeTab, setActiveTab] = useState<string | null>('logs');
-  const [draft, setDraft] = useState('');
 
   const { instances, activeInstanceId } = useInstancesStore();
-  const messages = mockData.getMessages();
   const tasks = mockData.getTasks();
   const logs = mockData.getLogs();
 
@@ -53,24 +41,9 @@ export function DashboardPage() {
           </Paper>
 
           <Group align="flex-start" grow>
-            <Paper p="md" withBorder style={{ minHeight: 420, flex: 2 }}>
-              <Stack gap="sm">
-                <Title order={4}>Chat</Title>
-                {messages.map((message) => (
-                  <Box key={message.id}>
-                    <Text size="sm" c="dimmed">{message.author}</Text>
-                    <Text>{message.text}</Text>
-                  </Box>
-                ))}
-                <TextInput
-                  placeholder="Type a mock message"
-                  value={draft}
-                  onChange={(event) => setDraft(event.currentTarget.value)}
-                />
-              </Stack>
-            </Paper>
+            <ChatPanel instanceId={activeInstanceId} />
 
-            <Paper p="md" withBorder style={{ minHeight: 420, flex: 1 }}>
+            <Paper p="md" withBorder style={{ minHeight: 480, flex: 1 }}>
               <Tabs value={activeTab} onChange={setActiveTab}>
                 <Tabs.List>
                   <Tabs.Tab value="logs">Logs</Tabs.Tab>

@@ -104,3 +104,21 @@
 - Sidebar in eigene Komponenten extrahieren.
 - Zustand als Single Source für instances + active selection.
 - Minimal, aber vollständig klickbares UI liefern.
+
+## 2026-02-19 23:34 UTC — Step 3
+### User Prompt
+> [Thu 2026-02-19 23:34 UTC] Step 3: Baue das Chat UI fertig (noch Mock)...
+
+(Kernaussagen gespeichert)
+- Message list mit Rollen: user/assistant/system/tool
+- Composer unten: textarea + send button
+- Enter send, Shift+Enter newline
+- Beim Send: user message einfügen + assistant token-stream simulieren
+- Auto-scroll, aber bei manuellem Hochscrollen nicht springen
+- Konversation pro Instance getrennt
+- Alles mock, aber realistisch
+
+### Interne Sub-Prompts / Arbeitsnotizen
+- Chat in eigene Komponente extrahieren (`components/chat`).
+- Zustand-Store für Conversations pro Instance anlegen.
+- Fake stream service per token chunks + kleiner delay.

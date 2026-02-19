@@ -33,11 +33,12 @@
 - Step 1: Routing auf `/` als Dashboard-Default gesetzt.
 - Step 1: Typen + `services/mock` Datenlieferer erstellt.
 - Step 2: Instances Sidebar vollständig per Mock umgesetzt (Zustand Store, Active Selection, Rename, Create via Modal).
+- Step 3: Chat UI mit Mock-Realtime fertiggestellt (Author-Bubbles, Composer, Enter/Shift+Enter, tokenweises Assistant-Streaming, per-instance conversations, basic smart autoscroll).
 
 ## Next
-- Step 3: Event-Protokoll + MockEventBus implementieren.
-- Step 4: Store-Layer für Events/State ergänzen.
-- Step 5: Mock-Echtzeitupdates in Chat/Logs/Tasks einhängen.
+- Step 4: Event-Protokoll + MockEventBus implementieren.
+- Step 5: Event-Stream an Logs/Tasks anbinden.
+- Step 6: Mock-Realtime Controls für Testszenarien einbauen.
 
 ## Blockers
 - Keine.

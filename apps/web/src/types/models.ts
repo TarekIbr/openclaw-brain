@@ -15,7 +15,7 @@ export interface Agent {
 
 export interface Message {
   id: string;
-  author: 'user' | 'agent' | 'system';
+  author: 'user' | 'assistant' | 'system' | 'tool';
   text: string;
   createdAt: string;
 }
