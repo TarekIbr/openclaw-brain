@@ -37,3 +37,21 @@
 ### Interne Sub-Prompts / Arbeitsnotizen
 - Bestehenden Stand auf Step-0-Format normalisieren statt doppelt neu aufzusetzen.
 - Dokumente auf konsistente Step-Nummerierung umstellen.
+
+## 2026-02-19 23:24 UTC — Step 1
+### User Prompt
+> [Thu 2026-02-19 23:24 UTC] ... Step 1: Erstelle ein React+TypeScript Projekt mit Vite unter apps/web ...
+
+(Kernaussagen gespeichert)
+- Falls bereits umgesetzt: bestehende Teile skippen
+- Dashboard-Skeleton mit Left Sidebar, Topbar, Main Chat Placeholder, Right Panel (Logs/Tasks Placeholder)
+- Routing: `/dashboard` (default), `/agents` (placeholder)
+- Kein Backend, nur Mock-Daten
+- Typen: `Instance`, `Agent`, `Message`, `Task`, `LogLine`, `Event`
+- `services/mock/` mit Fake-Daten
+- README Start-Commands korrekt halten
+- Nach Step 1 stoppen
+
+### Interne Sub-Prompts / Arbeitsnotizen
+- Vorhandenes Vite-Setup beibehalten und nur fehlende Anforderungen ergänzen.
+- Step klein halten, klare Dateien, keine Backend-Integration.
