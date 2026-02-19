@@ -22,8 +22,11 @@ export interface Message {
 
 export interface Task {
   id: string;
-  title: string;
-  state: 'todo' | 'in_progress' | 'done';
+  name: string;
+  type: string;
+  status: 'queued' | 'running' | 'done' | 'failed';
+  startedAt: string;
+  updatedAt: string;
 }
 
 export interface LogLine {

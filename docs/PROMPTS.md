@@ -122,3 +122,20 @@
 - Chat in eigene Komponente extrahieren (`components/chat`).
 - Zustand-Store für Conversations pro Instance anlegen.
 - Fake stream service per token chunks + kleiner delay.
+
+## 2026-02-19 23:37 UTC — Step 4
+### User Prompt
+> [Thu 2026-02-19 23:37 UTC] Step 4: Implementiere rechts Tabs “Logs” und “Tasks”...
+
+(Kernaussagen gespeichert)
+- Logs: Live feed (1 line/sec) pro Instance
+- Filter level info/warn/error
+- Pause/Resume + Clear
+- Tasks: name/type/status/started/updated
+- Button "Start Autonomy Loop" erzeugt running task + log events
+- Monitoring soll realistisch wirken (mock)
+
+### Interne Sub-Prompts / Arbeitsnotizen
+- Monitoring in getrennte Komponenten + Zustand-Store auslagern.
+- Per-instance State für Logs/Tasks/Filter/Pause.
+- Autonomy Loop als zeitgesteuerte Mock-Sequenz mit Task-Status-Update.

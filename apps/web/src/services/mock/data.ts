@@ -11,15 +11,8 @@ const agents: Agent[] = [
   { id: 'ag-2', name: 'Scout', role: 'Ops Monitor', instanceId: 'inst-2' }
 ];
 
-const tasks: Task[] = [
-  { id: 't-1', title: 'Wire mock event stream', state: 'in_progress' },
-  { id: 't-2', title: 'Review dashboard layout', state: 'todo' }
-];
-
-const logs: LogLine[] = [
-  { id: 'l-1', level: 'info', text: 'Dashboard boot complete', createdAt: '2026-02-19T23:00:01Z' },
-  { id: 'l-2', level: 'warn', text: 'Staging response time elevated', createdAt: '2026-02-19T23:00:06Z' }
-];
+const tasks: Task[] = [];
+const logs: LogLine[] = [];
 
 const seedMessages: Message[] = [
   { id: 'm-1', author: 'system', text: 'Conversation initialized.', createdAt: '2026-02-19T23:00:00Z' },

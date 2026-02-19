@@ -1,8 +1,7 @@
-import { useState } from 'react';
-import { AppShell, Badge, Group, Paper, Stack, Tabs, Text, Title } from '@mantine/core';
+import { AppShell, Badge, Group, Paper, Stack, Text, Title } from '@mantine/core';
 import { ChatPanel } from '../components/chat/ChatPanel';
 import { InstancesSidebar } from '../components/instances/InstancesSidebar';
-import { mockData } from '../services/mock/data';
+import { MonitoringPanel } from '../components/monitoring/MonitoringPanel';
 import { useInstancesStore } from '../store/instancesStore';
 
 const statusColor = {
@@ -12,11 +11,7 @@ const statusColor = {
 } as const;
 
 export function DashboardPage() {
-  const [activeTab, setActiveTab] = useState<string | null>('logs');
-
   const { instances, activeInstanceId } = useInstancesStore();
-  const tasks = mockData.getTasks();
-  const logs = mockData.getLogs();
 
   const activeInstance = instances.find((instance) => instance.id === activeInstanceId) ?? instances[0];
 
@@ -42,31 +37,7 @@ export function DashboardPage() {
 
           <Group align="flex-start" grow>
             <ChatPanel instanceId={activeInstanceId} />
-
-            <Paper p="md" withBorder style={{ minHeight: 480, flex: 1 }}>
-              <Tabs value={activeTab} onChange={setActiveTab}>
-                <Tabs.List>
-                  <Tabs.Tab value="logs">Logs</Tabs.Tab>
-                  <Tabs.Tab value="tasks">Tasks</Tabs.Tab>
-                </Tabs.List>
-
-                <Tabs.Panel value="logs" pt="sm">
-                  <Stack gap="xs">
-                    {logs.map((line) => (
-                      <Text key={line.id} size="sm">[{line.level}] {line.text}</Text>
-                    ))}
-                  </Stack>
-                </Tabs.Panel>
-
-                <Tabs.Panel value="tasks" pt="sm">
-                  <Stack gap="xs">
-                    {tasks.map((task) => (
-                      <Text key={task.id} size="sm">{task.title} ({task.state})</Text>
-                    ))}
-                  </Stack>
-                </Tabs.Panel>
-              </Tabs>
-            </Paper>
+            <MonitoringPanel instanceId={activeInstanceId} />
           </Group>
         </Stack>
       </AppShell.Main>
