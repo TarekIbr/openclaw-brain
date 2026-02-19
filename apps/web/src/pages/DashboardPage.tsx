@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import {
   AppShell,
   Badge,
@@ -11,41 +11,31 @@ import {
   TextInput,
   Title
 } from '@mantine/core';
+import { InstancesSidebar } from '../components/instances/InstancesSidebar';
 import { mockData } from '../services/mock/data';
+import { useInstancesStore } from '../store/instancesStore';
+
+const statusColor = {
+  idle: 'gray',
+  running: 'teal',
+  paused: 'yellow'
+} as const;
 
 export function DashboardPage() {
   const [activeTab, setActiveTab] = useState<string | null>('logs');
   const [draft, setDraft] = useState('');
 
-  const instances = mockData.getInstances();
+  const { instances, activeInstanceId } = useInstancesStore();
   const messages = mockData.getMessages();
   const tasks = mockData.getTasks();
   const logs = mockData.getLogs();
 
-  const activeInstance = instances[0];
-
-  const statusColor = useMemo(() => {
-    if (activeInstance.status === 'online') return 'teal';
-    if (activeInstance.status === 'degraded') return 'yellow';
-    return 'red';
-  }, [activeInstance.status]);
+  const activeInstance = instances.find((instance) => instance.id === activeInstanceId) ?? instances[0];
 
   return (
-    <AppShell navbar={{ width: 260, breakpoint: 'sm' }} padding="md">
+    <AppShell navbar={{ width: 320, breakpoint: 'sm' }} padding="md">
       <AppShell.Navbar p="md">
-        <Stack gap="md">
-          <Title order={4}>Instances</Title>
-          {instances.map((instance) => (
-            <Paper key={instance.id} p="sm" withBorder>
-              <Group justify="space-between">
-                <Text fw={600}>{instance.name}</Text>
-                <Badge size="sm" color={instance.status === 'online' ? 'teal' : instance.status === 'degraded' ? 'yellow' : 'red'}>
-                  {instance.status}
-                </Badge>
-              </Group>
-            </Paper>
-          ))}
-        </Stack>
+        <InstancesSidebar />
       </AppShell.Navbar>
 
       <AppShell.Main>
@@ -53,10 +43,12 @@ export function DashboardPage() {
           <Paper p="md" withBorder>
             <Group justify="space-between">
               <Title order={3}>Dashboard</Title>
-              <Group gap="xs">
-                <Text size="sm">Active: {activeInstance.name}</Text>
-                <Badge color={statusColor}>{activeInstance.status}</Badge>
-              </Group>
+              {activeInstance ? (
+                <Group gap="xs">
+                  <Text size="sm">Active: {activeInstance.name}</Text>
+                  <Badge color={statusColor[activeInstance.status]}>{activeInstance.status}</Badge>
+                </Group>
+              ) : null}
             </Group>
           </Paper>
 

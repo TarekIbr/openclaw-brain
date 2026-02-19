@@ -1,4 +1,4 @@
-export type InstanceStatus = 'online' | 'degraded' | 'offline';
+export type InstanceStatus = 'idle' | 'running' | 'paused';
 
 export interface Instance {
   id: string;

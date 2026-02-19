@@ -9,14 +9,15 @@ OpenClaw Brain – frontend-first React + TypeScript app with mock realtime even
 - **Step 1**: Dashboard-Skeleton mit Mantine UI Kit umgesetzt (Sidebar Instances, Topbar Status, Chat Main, Logs/Tasks Tabs rechts).
 - **Step 1**: Routing auf `/` als Dashboard-Default umgestellt.
 - **Step 1**: Typen angelegt (`Instance`, `Agent`, `Message`, `Task`, `LogLine`) + `services/mock` Fake-Daten-Service.
+- **Step 2**: Instances Sidebar vollständig mit Zustand-Store umgesetzt (select active, rename inline, create via modal, active highlight).
 
 ## 🚧 In Progress
-- **Step 2**: Event-Protokoll und `MockEventBus` aufsetzen.
+- **Step 3**: Event-Protokoll und `MockEventBus` aufsetzen.
 
 ## 🧭 Next
-1. Step 2: Event protocol + `MockEventBus` service implementieren.
-2. Step 3: Store-Layer für Echtzeit-Events und UI-State einführen.
-3. Step 4: Chat/Logs/Tasks mit mock realtime updates verbinden.
+1. Step 3: Event protocol + `MockEventBus` service implementieren.
+2. Step 4: Store-Layer mit Event-Stream für Chat/Logs/Tasks verbinden.
+3. Step 5: Realtime Mock Controls im UI ergänzen.
 
 ## 🗺️ Roadmap
 - Phase A: Foundation (repo, docs, frontend shell)
@@ -37,3 +38,4 @@ Open in browser:
 
 ## Release Notes
 - Step 1 rebuilt with Mantine and a cleaner dashboard skeleton + dark theme baseline.
+- Step 2 adds a full mock Instances Sidebar with Zustand-powered create/select/rename flows.

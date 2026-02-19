@@ -1,9 +1,9 @@
 import type { Agent, Instance, LogLine, Message, Task } from '../../types/models';
 
 const instances: Instance[] = [
-  { id: 'inst-1', name: 'Prod Brain', status: 'online' },
-  { id: 'inst-2', name: 'Staging Brain', status: 'degraded' },
-  { id: 'inst-3', name: 'Local Lab', status: 'offline' }
+  { id: 'inst-1', name: 'Prod Brain', status: 'running' },
+  { id: 'inst-2', name: 'Staging Brain', status: 'idle' },
+  { id: 'inst-3', name: 'Local Lab', status: 'paused' }
 ];
 
 const agents: Agent[] = [

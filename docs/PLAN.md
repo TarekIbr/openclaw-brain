@@ -32,11 +32,12 @@
 - Step 1: Layout umgesetzt: Sidebar (Instances), Topbar (Active + Status), Main (Chat), Right Panel (Logs/Tasks Tabs).
 - Step 1: Routing auf `/` als Dashboard-Default gesetzt.
 - Step 1: Typen + `services/mock` Datenlieferer erstellt.
+- Step 2: Instances Sidebar vollständig per Mock umgesetzt (Zustand Store, Active Selection, Rename, Create via Modal).
 
 ## Next
-- Step 2: Event-Protokoll + MockEventBus implementieren.
-- Step 3: Store-Layer für Events/State ergänzen.
-- Step 4: Mock-Echtzeitupdates in Chat/Logs/Tasks einhängen.
+- Step 3: Event-Protokoll + MockEventBus implementieren.
+- Step 4: Store-Layer für Events/State ergänzen.
+- Step 5: Mock-Echtzeitupdates in Chat/Logs/Tasks einhängen.
 
 ## Blockers
 - Keine.

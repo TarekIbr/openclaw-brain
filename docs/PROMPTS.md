@@ -85,3 +85,22 @@
 ### Interne Sub-Prompts / Arbeitsnotizen
 - Mantine gewählt für schnelle, saubere Basis (Provider + Theme + Tabs/AppShell).
 - Bestehendes Mock-Modell wiederverwenden, aber API als getter kapseln.
+
+## 2026-02-19 23:31 UTC — Step 2
+### User Prompt
+> [Thu 2026-02-19 23:31 UTC] Step 2: Implementiere die Instances Sidebar vollständig (Mock)...
+
+(Kernaussagen gespeichert)
+- Vollständige Instances Sidebar
+- Status-Badge: `idle/running/paused`
+- `+ New Instance` Button + Modal + Instance wird aktiv
+- Instance Selection mit Active Highlight
+- Rename inline oder Modal (inline umgesetzt)
+- Struktur unter `components/instances/*`
+- Zustand mit Zustand Store
+- Alles Mock, keine API
+
+### Interne Sub-Prompts / Arbeitsnotizen
+- Sidebar in eigene Komponenten extrahieren.
+- Zustand als Single Source für instances + active selection.
+- Minimal, aber vollständig klickbares UI liefern.
