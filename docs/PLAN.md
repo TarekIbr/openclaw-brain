@@ -28,14 +28,15 @@
 - Step 0: Repo initialisiert, GitHub-Remote erstellt, `main` gepusht.
 - Step 0: Basis-Doku (`README`, `PLAN`, `PROMPTS`) und `.gitignore` angelegt.
 - Step 0: Vite React+TS Skeleton unter `apps/web` erstellt.
-- Step 1: Dashboard-Skeleton mit 3-Panel-Layout + Platzhaltern gebaut.
-- Step 1: Routing ergänzt (`/dashboard` als Default, `/agents` Placeholder).
-- Step 1: Typmodell und Mock-Daten-Service unter `services/mock` erstellt.
+- Step 1: Dashboard-Skeleton mit Mantine UI Kit neu aufgebaut.
+- Step 1: Layout umgesetzt: Sidebar (Instances), Topbar (Active + Status), Main (Chat), Right Panel (Logs/Tasks Tabs).
+- Step 1: Routing auf `/` als Dashboard-Default gesetzt.
+- Step 1: Typen + `services/mock` Datenlieferer erstellt.
 
 ## Next
 - Step 2: Event-Protokoll + MockEventBus implementieren.
 - Step 3: Store-Layer für Events/State ergänzen.
-- Step 4: UI-Interaktionen und tabbed Right Panel ausbauen.
+- Step 4: Mock-Echtzeitupdates in Chat/Logs/Tasks einhängen.
 
 ## Blockers
 - Keine.

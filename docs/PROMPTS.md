@@ -67,3 +67,21 @@
 ### Interne Sub-Prompts / Arbeitsnotizen
 - Globales CSS hinzufügen und Layout visuell klar machen.
 - Minimal interaktive Elemente ergänzen (Tabs, Navigation, Input/Button), ohne Backend einzuführen.
+
+## 2026-02-19 23:29 UTC — Step 1 (Redo)
+### User Prompt
+> [Thu 2026-02-19 23:29 UTC] ... Baue ein Dashboard-Skeleton ... Verwende ein simples UI Kit ...
+
+(Kernaussagen gespeichert)
+- Step 1 neu aufsetzen, vorhandenes ggf. skippen
+- Layout fix: Sidebar / Topbar / Main Chat / Right Panel Tabs
+- Routing: `/` lädt Dashboard
+- UI Kit verwenden (Mantine oder shadcn/ui)
+- Design-Basis (spacing, typography, optional dark mode)
+- Types: `Instance`, `Agent`, `Message`, `Task`, `LogLine`
+- `services/mock` als Fake-Datenlieferant
+- Output inkl. README Start-Commands
+
+### Interne Sub-Prompts / Arbeitsnotizen
+- Mantine gewählt für schnelle, saubere Basis (Provider + Theme + Tabs/AppShell).
+- Bestehendes Mock-Modell wiederverwenden, aber API als getter kapseln.

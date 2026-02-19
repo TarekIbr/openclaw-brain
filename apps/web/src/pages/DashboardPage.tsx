@@ -1,106 +1,110 @@
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { agents, instances, logLines, messages, tasks } from '../services/mock/data';
+import {
+  AppShell,
+  Badge,
+  Box,
+  Group,
+  Paper,
+  Stack,
+  Tabs,
+  Text,
+  TextInput,
+  Title
+} from '@mantine/core';
+import { mockData } from '../services/mock/data';
 
 export function DashboardPage() {
-  const [activeTab, setActiveTab] = useState<'logs' | 'tasks'>('logs');
+  const [activeTab, setActiveTab] = useState<string | null>('logs');
   const [draft, setDraft] = useState('');
 
-  const visibleItems = useMemo(() => {
-    return activeTab === 'logs' ? logLines.map((l) => `[${l.level}] ${l.text}`) : tasks.map((t) => `${t.title} (${t.state})`);
-  }, [activeTab]);
+  const instances = mockData.getInstances();
+  const messages = mockData.getMessages();
+  const tasks = mockData.getTasks();
+  const logs = mockData.getLogs();
 
-  const active = instances[0];
+  const activeInstance = instances[0];
+
+  const statusColor = useMemo(() => {
+    if (activeInstance.status === 'online') return 'teal';
+    if (activeInstance.status === 'degraded') return 'yellow';
+    return 'red';
+  }, [activeInstance.status]);
 
   return (
-    <div className="layout">
-      <aside className="sidebar stack">
-        <div className="card">
-          <h3>Navigation</h3>
-          <div className="stack">
-            <Link className="nav-btn active" to="/dashboard">Dashboard</Link>
-            <Link className="nav-btn" to="/agents">Agents</Link>
-          </div>
-        </div>
+    <AppShell navbar={{ width: 260, breakpoint: 'sm' }} padding="md">
+      <AppShell.Navbar p="md">
+        <Stack gap="md">
+          <Title order={4}>Instances</Title>
+          {instances.map((instance) => (
+            <Paper key={instance.id} p="sm" withBorder>
+              <Group justify="space-between">
+                <Text fw={600}>{instance.name}</Text>
+                <Badge size="sm" color={instance.status === 'online' ? 'teal' : instance.status === 'degraded' ? 'yellow' : 'red'}>
+                  {instance.status}
+                </Badge>
+              </Group>
+            </Paper>
+          ))}
+        </Stack>
+      </AppShell.Navbar>
 
-        <div className="card">
-          <h4>Instances</h4>
-          <ul className="list-clean">
-            {instances.map((instance) => (
-              <li className="row" key={instance.id}>
-                <span>{instance.name}</span>
-                <span className="muted">{instance.status}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </aside>
+      <AppShell.Main>
+        <Stack gap="md">
+          <Paper p="md" withBorder>
+            <Group justify="space-between">
+              <Title order={3}>Dashboard</Title>
+              <Group gap="xs">
+                <Text size="sm">Active: {activeInstance.name}</Text>
+                <Badge color={statusColor}>{activeInstance.status}</Badge>
+              </Group>
+            </Group>
+          </Paper>
 
-      <section className="main stack">
-        <header className="card row">
-          <span><strong>Active:</strong> {active.name}</span>
-          <span className="muted"><strong>Status:</strong> {active.status}</span>
-        </header>
+          <Group align="flex-start" grow>
+            <Paper p="md" withBorder style={{ minHeight: 420, flex: 2 }}>
+              <Stack gap="sm">
+                <Title order={4}>Chat</Title>
+                {messages.map((message) => (
+                  <Box key={message.id}>
+                    <Text size="sm" c="dimmed">{message.author}</Text>
+                    <Text>{message.text}</Text>
+                  </Box>
+                ))}
+                <TextInput
+                  placeholder="Type a mock message"
+                  value={draft}
+                  onChange={(event) => setDraft(event.currentTarget.value)}
+                />
+              </Stack>
+            </Paper>
 
-        <main className="card">
-          <h3>Chat</h3>
-          <div className="stack">
-            {messages.map((message) => (
-              <div key={message.id}>
-                <strong>{message.author}:</strong> {message.text}
-              </div>
-            ))}
-          </div>
+            <Paper p="md" withBorder style={{ minHeight: 420, flex: 1 }}>
+              <Tabs value={activeTab} onChange={setActiveTab}>
+                <Tabs.List>
+                  <Tabs.Tab value="logs">Logs</Tabs.Tab>
+                  <Tabs.Tab value="tasks">Tasks</Tabs.Tab>
+                </Tabs.List>
 
-          <div className="chat-controls">
-            <input
-              className="chat-input"
-              value={draft}
-              onChange={(event) => setDraft(event.target.value)}
-              placeholder="Type a mock message..."
-            />
-            <button className="send-btn" onClick={() => setDraft('')}>Send</button>
-          </div>
-        </main>
-      </section>
+                <Tabs.Panel value="logs" pt="sm">
+                  <Stack gap="xs">
+                    {logs.map((line) => (
+                      <Text key={line.id} size="sm">[{line.level}] {line.text}</Text>
+                    ))}
+                  </Stack>
+                </Tabs.Panel>
 
-      <aside className="right-panel stack">
-        <div className="card">
-          <h3>Right Panel</h3>
-          <div className="chat-controls">
-            <button
-              className={`tab-btn ${activeTab === 'logs' ? 'active' : ''}`}
-              onClick={() => setActiveTab('logs')}
-            >
-              Logs
-            </button>
-            <button
-              className={`tab-btn ${activeTab === 'tasks' ? 'active' : ''}`}
-              onClick={() => setActiveTab('tasks')}
-            >
-              Tasks
-            </button>
-          </div>
-        </div>
-
-        <div className="card">
-          <h4>{activeTab === 'logs' ? 'Logs' : 'Tasks'}</h4>
-          <ul className="list-clean">
-            {visibleItems.map((item, index) => (
-              <li key={`${activeTab}-${index}`}>{item}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="card">
-          <h4>Agents</h4>
-          <ul className="list-clean">
-            {agents.map((agent) => (
-              <li key={agent.id}>{agent.name} — <span className="muted">{agent.role}</span></li>
-            ))}
-          </ul>
-        </div>
-      </aside>
-    </div>
+                <Tabs.Panel value="tasks" pt="sm">
+                  <Stack gap="xs">
+                    {tasks.map((task) => (
+                      <Text key={task.id} size="sm">{task.title} ({task.state})</Text>
+                    ))}
+                  </Stack>
+                </Tabs.Panel>
+              </Tabs>
+            </Paper>
+          </Group>
+        </Stack>
+      </AppShell.Main>
+    </AppShell>
   );
 }

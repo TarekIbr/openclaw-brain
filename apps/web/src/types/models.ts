@@ -32,10 +32,3 @@ export interface LogLine {
   text: string;
   createdAt: string;
 }
-
-export interface Event {
-  id: string;
-  type: 'message.created' | 'task.updated' | 'log.appended';
-  createdAt: string;
-  payload: Record<string, unknown>;
-}
