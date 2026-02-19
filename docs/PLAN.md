@@ -1,0 +1,36 @@
+# PLAN
+
+## Ziele
+- OpenClaw Brain als React + TypeScript Web-App aufbauen.
+- Frontend-first mit Mock-Daten und Realtime-Event-Protokoll starten.
+- Architektur so vorbereiten, dass später ein echtes Backend eingesteckt werden kann.
+
+## Architektur (aktueller Stand)
+- Monorepo-light Struktur mit `apps/web`.
+- Vite-kompatible TS-React App (manuell aufgebaut).
+- Geplante Layer:
+  - `types/`: Event- und Domain-Typen
+  - `services/`: `MockEventBus`, später echte Transportadapter
+  - `store/`: zentraler State für UI + Events
+  - `components/` und `pages/`: UI
+
+## Entscheidungen
+- Kleine, reviewbare Steps statt großer Initial-Scaffold-Explosion.
+- Frontend ohne echte API-Calls, nur Mocks.
+- Dokumentation von Beginn an als Taskboard + Plan geführt.
+
+## Offene Fragen
+- Soll der State mit Redux Toolkit, Zustand oder reinem React Context umgesetzt werden?
+- Welche primären User-Flows zuerst (Dashboard, Session Timeline, Prompt Log)?
+- Welche Event-Schemata müssen stabil sein für späteres Backend?
+
+## Done
+- Step 1: Repo-Struktur, Grunddateien und Doku angelegt.
+
+## Next
+- Step 2: Event-Protokoll + MockEventBus implementieren.
+- Step 3: Store + Domain-Typen ergänzen.
+- Step 4: Erste Seite mit Live-Mockfeed bauen.
+
+## Blockers
+- GitHub-Repo-Erstellung via `gh repo create` noch offen (CLI/Auth auf Host aktuell nicht verfügbar).
