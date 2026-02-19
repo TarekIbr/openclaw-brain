@@ -9,8 +9,11 @@ export interface Instance {
 export interface Agent {
   id: string;
   name: string;
-  role: string;
-  instanceId: string;
+  modelPolicy: 'balanced' | 'fast' | 'deep';
+  toolsPolicy: 'restricted' | 'standard' | 'elevated';
+  systemPrompt: string;
+  versionLabel: string;
+  updatedAt: string;
 }
 
 export interface Message {

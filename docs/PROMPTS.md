@@ -139,3 +139,20 @@
 - Monitoring in getrennte Komponenten + Zustand-Store auslagern.
 - Per-instance State für Logs/Tasks/Filter/Pause.
 - Autonomy Loop als zeitgesteuerte Mock-Sequenz mit Task-Status-Update.
+
+## 2026-02-19 23:40 UTC — Step 5
+### User Prompt
+> [Thu 2026-02-19 23:40 UTC] Step 5: Baue Agent Manager UI (noch Mock, aber CRUD im Frontend)...
+
+(Kernaussagen gespeichert)
+- Neue Route `/agents`
+- Liste: name, model policy, tools policy badge, updated time
+- Add/Edit Modal: name + system prompt editor + model policy dropdown
+- Delete confirmation
+- System prompt editor multiline + version label (UI)
+- Vollständiges UI, Daten aus mock store
+
+### Interne Sub-Prompts / Arbeitsnotizen
+- Agent-Domain in Typen + Mock-Store standardisieren.
+- CRUD komplett in Zustand-Store, keine API-Aufrufe.
+- Mantine Table + Modal-Flow für schnelle Reviewbarkeit.

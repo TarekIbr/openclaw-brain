@@ -35,11 +35,12 @@
 - Step 2: Instances Sidebar vollständig per Mock umgesetzt (Zustand Store, Active Selection, Rename, Create via Modal).
 - Step 3: Chat UI mit Mock-Realtime fertiggestellt (Author-Bubbles, Composer, Enter/Shift+Enter, tokenweises Assistant-Streaming, per-instance conversations, basic smart autoscroll).
 - Step 4: Monitoring-Tabs mit Live-Simulation umgesetzt (Logs 1/s pro Instance inkl. Filter/Pause/Clear; Tasks inkl. Start Autonomy Loop + Log-Emissionen).
+- Step 5: Agent Manager UI als eigene Seite (`/agents`) mit Mock-CRUD (Add/Edit/Delete), Model/Tools Policies und System-Prompt Editor umgesetzt.
 
 ## Next
-- Step 5: Event-Protokoll + MockEventBus implementieren.
-- Step 6: Event-Stream für Chat/Logs/Tasks harmonisieren.
-- Step 7: Mock-Szenario Controls und Demo-Flows ergänzen.
+- Step 6: Event-Protokoll + MockEventBus implementieren.
+- Step 7: Event-Stream für Chat/Logs/Tasks harmonisieren.
+- Step 8: Mock-Szenario Controls und Demo-Flows ergänzen.
 
 ## Blockers
 - Keine.

@@ -12,14 +12,15 @@ OpenClaw Brain – frontend-first React + TypeScript app with mock realtime even
 - **Step 2**: Instances Sidebar vollständig mit Zustand-Store umgesetzt (select active, rename inline, create via modal, active highlight).
 - **Step 3**: Chat UI mock-realistisch umgesetzt (rollenbasierte Bubbles, Composer mit Enter/Shift+Enter, Fake-Streaming, Auto-Scroll mit User-Scroll-Respekt, Konversation pro Instance).
 - **Step 4**: Monitoring rechts umgesetzt: Logs/Tasks Tabs mit Live-Logfeed (1/s), Level-Filter, Pause/Resume, Clear und Autonomy-Task-Loop inkl. Log-Events.
+- **Step 5**: Agent Manager UI unter `/agents` mit mock CRUD umgesetzt (Liste, Add/Edit Modal inkl. System Prompt + Version Label, Delete Confirmation).
 
 ## 🚧 In Progress
-- **Step 5**: Event-Protokoll und `MockEventBus` aufsetzen.
+- **Step 6**: Event-Protokoll und `MockEventBus` aufsetzen.
 
 ## 🧭 Next
-1. Step 5: Event protocol + `MockEventBus` service implementieren.
-2. Step 6: Chat, Logs, Tasks über zentrales Event-Schema koppeln.
-3. Step 7: Szenario-Controls für reproduzierbare Mock-Demos ergänzen.
+1. Step 6: Event protocol + `MockEventBus` service implementieren.
+2. Step 7: Chat, Logs, Tasks über zentrales Event-Schema koppeln.
+3. Step 8: Szenario-Controls für reproduzierbare Mock-Demos ergänzen.
 
 ## 🗺️ Roadmap
 - Phase A: Foundation (repo, docs, frontend shell)
@@ -43,3 +44,4 @@ Open in browser:
 - Step 2 adds a full mock Instances Sidebar with Zustand-powered create/select/rename flows.
 - Step 3 upgrades chat UX with per-instance conversations and fake assistant token streaming.
 - Step 4 adds realistic monitoring behavior: live logs, controls, and autonomy-loop task simulation.
+- Step 5 adds Agent Manager page with complete frontend CRUD on mock store data.

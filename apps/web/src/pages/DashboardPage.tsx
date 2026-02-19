@@ -1,4 +1,5 @@
-import { AppShell, Badge, Group, Paper, Stack, Text, Title } from '@mantine/core';
+import { AppShell, Badge, Button, Group, Paper, Stack, Text, Title } from '@mantine/core';
+import { Link } from 'react-router-dom';
 import { ChatPanel } from '../components/chat/ChatPanel';
 import { InstancesSidebar } from '../components/instances/InstancesSidebar';
 import { MonitoringPanel } from '../components/monitoring/MonitoringPanel';
@@ -30,6 +31,7 @@ export function DashboardPage() {
                 <Group gap="xs">
                   <Text size="sm">Active: {activeInstance.name}</Text>
                   <Badge color={statusColor[activeInstance.status]}>{activeInstance.status}</Badge>
+                  <Button size="xs" variant="default" component={Link} to="/agents">Agents</Button>
                 </Group>
               ) : null}
             </Group>

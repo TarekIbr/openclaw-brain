@@ -7,8 +7,24 @@ const instances: Instance[] = [
 ];
 
 const agents: Agent[] = [
-  { id: 'ag-1', name: 'Jarvis', role: 'Butler AI', instanceId: 'inst-1' },
-  { id: 'ag-2', name: 'Scout', role: 'Ops Monitor', instanceId: 'inst-2' }
+  {
+    id: 'ag-1',
+    name: 'Jarvis',
+    modelPolicy: 'balanced',
+    toolsPolicy: 'standard',
+    systemPrompt: 'You are a loyal AI butler. Be clear and proactive.',
+    versionLabel: 'v1.0',
+    updatedAt: '2026-02-19T23:00:00Z'
+  },
+  {
+    id: 'ag-2',
+    name: 'Scout',
+    modelPolicy: 'fast',
+    toolsPolicy: 'restricted',
+    systemPrompt: 'You are an ops scout. Prioritize short incident summaries.',
+    versionLabel: 'v0.9',
+    updatedAt: '2026-02-19T23:03:00Z'
+  }
 ];
 
 const tasks: Task[] = [];
