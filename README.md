@@ -1,61 +1,69 @@
-# openclaw-brain
+# OpenClaw Brain
 
-OpenClaw Brain – frontend-first React + TypeScript app with mock realtime events.
+**A control dashboard for AI agents: manage instances and agents, chat with them and watch logs and tasks in real time.**
 
-## ✅ Done
-- **Frontend Step 0–7**: Dashboard, Chat, Monitoring, Agent Manager, Service Layer und MockWebSocket-Realtime stehen.
-- **Backend Step 1**: `apps/api` Fastify + TypeScript Skeleton angelegt.
-- **Backend Step 1**: `GET /api/health` liefert `{ ok: true, ts, version }`.
-- **Backend Step 1**: `.env`-Konfiguration vorbereitet (`PORT`, `NODE_ENV`, `VERSION`).
-- **Backend Step 1**: `packages/shared` Basisstruktur angelegt (shared types/schemas).
-- **Backend Step 1**: Dockerfile für API + `docker-compose.yml` Service ergänzt.
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)
+![Fastify](https://img.shields.io/badge/Fastify-000000?logo=fastify&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
 
-## 🚧 In Progress
-- **Backend Step 2**: WS + Auth.
+---
 
-## 🧭 Next
-1. Backend Step 2: WebSocket Gateway + Auth-Basis.
-2. Backend Step 3: Event-Bridge API ↔ Web.
-3. Backend Step 4: Persistenz (erste DB-Schnittstellen).
+## What it does
 
-## 🗺️ Roadmap
-- Phase A: Foundation (repo, docs, frontend shell)
-- Phase B: Realtime Mock Core (event protocol, bus, store)
-- Phase C: Product Flows (pages/components with mock data)
-- Phase D: Backend Plug-In Layer (replace mock bus with real transport)
-- Phase E: Quality (tests, linting, CI)
+- **Instances:** create agent instances and switch between them in a sidebar
+- **Agent manager:** create, edit and delete agents
+- **Chat:** talk to an agent, with answers streamed token by token
+- **Monitoring:** live log stream and task list with status updates
+- **Realtime layer:** a typed event bus (`chat.delta`, `log.line`, `task.update` …). Right now a mock WebSocket feeds it, and later the real backend will plug into the same interface without changes to the UI.
 
-## 🧪 How to run
-Web app:
+## Architecture
+
+```
+apps/
+  web/        React + TypeScript + Vite frontend
+              ├─ components/   chat, agents, instances, monitoring
+              ├─ services/     API client + mock WebSocket (realtime events)
+              └─ store/        state management with Zustand
+  api/        Fastify + TypeScript backend (health endpoint, Dockerfile)
+packages/
+  shared/     shared types and schemas for web and api
+docker-compose.yml
+```
+
+The frontend was built **frontend-first**: all flows run against a mock event stream, so the UI could be finished and tested before the backend exists.
+
+## Getting started
+
+**Web app**
 ```bash
 cd apps/web
 npm install
-npm run dev
+npm run dev        # http://localhost:5173
 ```
 
-API:
+**API**
 ```bash
 cd apps/api
 cp .env.example .env
 npm install
-npm run dev
+npm run dev        # http://localhost:8080/api/health
 ```
 
-Docker (API only):
+**API with Docker**
 ```bash
 docker compose up --build api
 ```
 
-Open in browser:
-- Web: `http://localhost:5173/`
-- API health: `http://localhost:8080/api/health`
+## Roadmap
 
-## Release Notes
-- Step 1 rebuilt with Mantine and a cleaner dashboard skeleton + dark theme baseline.
-- Step 2 adds a full mock Instances Sidebar with Zustand-powered create/select/rename flows.
-- Step 3 upgrades chat UX with per-instance conversations and fake assistant token streaming.
-- Step 4 adds realistic monitoring behavior: live logs, controls, and autonomy-loop task simulation.
-- Step 5 adds Agent Manager page with complete frontend CRUD on mock store data.
-- Step 6 adds stable service interfaces so backend transport can be swapped later without UI refactor.
-- Step 7 introduces a typed realtime event protocol and a MockWebSocket emitter architecture.
-- Backend Step 1 introduces Fastify API skeleton with health endpoint and Docker compose service.
+- [x] Frontend: dashboard, chat, monitoring, agent manager, service layer, mock realtime
+- [x] Backend: Fastify skeleton, `GET /api/health`, Dockerfile, shared package
+- [ ] WebSocket gateway + authentication
+- [ ] Event bridge between API and web (replace the mock stream)
+- [ ] Persistence (database)
+- [ ] Tests, linting, CI
+
+---
+
+Built by [Tarek](https://github.com/TarekIbr)
